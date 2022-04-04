@@ -3,46 +3,45 @@ from datetime import date
 import json,random
 
 app = Flask(__name__)
+counter = 0
 
-def determineAnswer(advance):
-	if advance:
-		dateSeed = random.randint(0,1000)
-	else:
-		dateSeed = date.today().strftime("%m%d%Y")
-	random.seed(int(dateSeed))
+def determineAnswer():
+	global counter
+	dateSeed = date.today().strftime("%m%d%Y")
+	random.seed(int(dateSeed)+counter)
 	with open('./data/players.json') as json_data:
 		players = json.load(json_data)
 		index = random.randint(0,len(players)-1)
 		return players[index]
 
-def getPuzzleId(advance):
-	if advance:
-		startDate = date(2021,random.randint(1,11),random.randint(1,20))
-	else:
-		startDate = date(2022,4,4) #YYYY-mm-dd
-	id = date.today() - startDate
-	return id.days
+def getPuzzleId():
+    global counter
+    startDate = date(2022,4,4) #YYYY-mm-dd
+    id = date.today() - startDate
+    return id.days + counter
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	global counter
 	if request.method == 'POST':
 		if request.form.get('advance') == 'Advance Day':
-			advance = True
+			counter += 1
+		elif request.form.get('reset') == 'Reset Day':
+			counter = 0
 		else:
-			advance = False
+			pass # unknown behavior
 	elif request.method == 'GET':
-		return render_template("index.html", answer=determineAnswer(False), puzzleId=getPuzzleId(False))
+		return render_template("index.html", answer=determineAnswer(), puzzleId=getPuzzleId())
 
-	return render_template("index.html", answer=determineAnswer(advance), puzzleId=getPuzzleId(advance))
+	return render_template("index.html", answer=determineAnswer(), puzzleId=getPuzzleId())
 
 @app.route('/dailyAnswer')
 def answer():
-    return determineAnswer(False)
+    return determineAnswer()
 
 @app.route('/dailyPuzzleId')
 def puzzleId():
-	return jsonify({"puzzleId": getPuzzleId(False)})
+	return jsonify({"puzzleId": getPuzzleId()})
 
 if __name__ == '__main__':
     app.run(debug=True)
