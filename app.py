@@ -37,7 +37,7 @@ def index():
 
 @app.route('/dailyAnswer')
 def answer():
-	response = determineAnswer()
+	response = jsonify({"answer": determineAnswer()})
 	response.headers.add('Access-Control-Allow-Origin', '*')
 	return response
 
