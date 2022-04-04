@@ -37,11 +37,15 @@ def index():
 
 @app.route('/dailyAnswer')
 def answer():
-    return determineAnswer()
+	response = determineAnswer()
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	return response
 
 @app.route('/dailyPuzzleId')
 def puzzleId():
-	return jsonify({"puzzleId": getPuzzleId()})
+	response = jsonify({"puzzleId": getPuzzleId()})
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	return response
 
 if __name__ == '__main__':
     app.run(debug=True)
