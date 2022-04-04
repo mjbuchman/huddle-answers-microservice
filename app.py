@@ -39,9 +39,6 @@ def index():
 def answer():
 	response = jsonify({"answer": determineAnswer()})
 	response.headers.add('Access-Control-Allow-Origin', '*')
-	response.headers.add('Access-Control-Allow-Credentials', True)
-	response.headers.add('Access-Control-Allow-Methods', 'GET', 'OPTIONS')
-	response.headers.add('Access-Control-Allow-Headers', 'Origin', 'Content-Type')
 	return response
 
 @app.route('/dailyPuzzleId')
