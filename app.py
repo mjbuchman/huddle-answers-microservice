@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
 from datetime import date
 import json,random
 
 app = Flask(__name__)
+CORS(app)
 counter = 0
 
 def determineAnswer():
@@ -48,4 +50,4 @@ def puzzleId():
 	return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
