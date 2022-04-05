@@ -23,7 +23,9 @@ def getPuzzleId():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-	return render_template("index.html", answer=determineAnswer(), puzzleId=getPuzzleId())
+	with open('./data/players.json') as json_data:
+		todaysAnswer = json.load(json_data)
+	return render_template("index.html", answer=todaysAnswer, puzzleId=getPuzzleId())
 
 @app.route('/dailyAnswer')
 def answer():
