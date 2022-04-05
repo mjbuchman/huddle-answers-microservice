@@ -1,4 +1,20 @@
 {
-	"answer":{},
-	"puzzleId":0
+   "answer": {
+      "Team": "DET",
+      "FirstName": "Will",
+      "LastName": "Harris",
+      "PositionCategory": "DEF",
+      "Name": "Will Harris",
+      "PhotoUrl": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3915297.png",
+      "CollegeDraftTeam": "DET",
+      "CollegeDraftYear": 2019,
+      "id": 451,
+      "Position": "DB",
+      "AllTeams": [
+         "DET"
+      ],
+      "ProBowls": 0,
+      "Rings": 0
+   },
+   "puzzleId": 2
 }
