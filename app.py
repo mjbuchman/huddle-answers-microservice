@@ -20,6 +20,7 @@ def getFile():
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	json_data = getFile()
+	print(json_data)
 	todaysAnswer = json.loads(json_data.text)
 	return render_template("index.html", answer=todaysAnswer["record"]["answer"], puzzleId=todaysAnswer["record"]["puzzleId"])
 
