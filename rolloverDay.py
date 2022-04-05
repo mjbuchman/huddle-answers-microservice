@@ -2,7 +2,7 @@ from datetime import date
 import json,random
 
 def determineAnswer():
-	dateSeed = date.today()
+	dateSeed = date.today().strftime("%m/%d/%Y, %H:%M:%S")
 	random.seed(dateSeed)
 	with open('./data/players.json') as json_data:
 		players = json.load(json_data)
