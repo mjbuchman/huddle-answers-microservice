@@ -19,7 +19,7 @@ def determineAnswer():
 def getPuzzleId():
     startDate = date(2022,4,4) #YYYY-mm-dd
     id = date.today() - startDate
-    return id.days
+    return id.seconds
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
